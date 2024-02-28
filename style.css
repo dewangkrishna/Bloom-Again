@@ -127,3 +127,10 @@ body, html {
     right: 0;
   }
   
+  .login-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+  }
+  
