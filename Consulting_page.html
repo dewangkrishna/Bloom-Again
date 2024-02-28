@@ -1,7 +1,91 @@
-<html>
-    <title>
-        Consulting
-    </title>
-    <head>This is the Consulting page</head>
-    <body>Here the doctors list will be there</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting Page</title>
+<link rel="stylesheet" href="consulting.css">
+</head>
+<body>
+
+<!-- Doctor Cards Section -->
+<div class="container">
+  <h1>Consulting Page</h1>
+  <div class="doctor-cards">
+    <div class="doctor-card" data-doctor="Doctor Name 1">
+      <img src="assets/images.jpg" alt="Doctor Name 1">
+      <h3>Doctor Name 1</h3>
+      <div class="rating">
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+      </div>
+      <button class="book-btn">Book Appointment</button>
+    </div>
+    <!-- Add more doctor cards here -->
+    <div class="doctor-card" data-doctor="Doctor Name 1">
+        <img src="assets/images.jpg" alt="Doctor Name 1">
+        <h3>Doctor Name 1</h3>
+        <div class="rating">
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+        </div>
+        <button class="book-btn">Book Appointment</button>
+      </div>
+
+      <div class="doctor-card" data-doctor="Doctor Name 1">
+        <img src="assets/images.jpg" alt="Doctor Name 1">
+        <h3>Doctor Name 1</h3>
+        <div class="rating">
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+        </div>
+        <button class="book-btn">Book Appointment</button>
+      </div>
+
+      <div class="doctor-card" data-doctor="Doctor Name 1">
+        <img src="assets/images.jpg" alt="Doctor Name 1">
+        <h3>Doctor Name 1</h3>
+        <div class="rating">
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+        </div>
+        <button class="book-btn">Book Appointment</button>
+      </div>
+  </div>
+</div>
+
+<!-- Appointment Form Modal -->
+<div id="appointment-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Book Appointment</h2>
+    <form id="appointment-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br>
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required><br>
+      <label for="time-slot">Time Slot:</label>
+      <input type="text" id="time-slot" name="time-slot" required><br>
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+</div>
+
+<!-- Notification Section -->
+<div id="notification"></div>
+
+<script src="scripts.js"></script>
+</body>
 </html>

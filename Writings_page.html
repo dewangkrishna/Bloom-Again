@@ -1,7 +1,68 @@
-<html>
-    <title>
-        Let's Write
-    </title>
-    <head>This is the Writing page</head>
-    <body>Here People can Express their writing skills</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Sharing</title>
+  <link rel="stylesheet" href="write.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Quotes</h1>
+  <div id="quotes-container">
+    <div class="quote">
+      <p>"The only way to do great work is to love what you do."</p>
+      <span>- Steve Jobs</span>
+    </div>
+    <div class="quote">
+      <p>"Innovation distinguishes between a leader and a follower."</p>
+      <span>- Steve Jobs</span>
+    </div>
+    <div class="quote">
+      <p>"Success is not final, failure is not fatal: It is the courage to continue that counts."</p>
+      <span>- Winston Churchill</span>
+    </div>
+  </div>
+  <button onclick="openModal()">Write Yours</button>
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Write Your Quote</h2>
+    <div class="form-group">
+      <label for="quote">Quote:</label>
+      <textarea id="quote" name="quote" rows="4" cols="50"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author">
+    </div>
+    <button type="button" onclick="saveQuote()">Save</button>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById("myModal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+  }
+
+  function saveQuote() {
+    var quote = document.getElementById("quote").value;
+    var author = document.getElementById("author").value;
+
+    alert("Uploaded");
+
+    closeModal();
+
+    // You can handle saving the quote to a database or any other storage here
+  }
+</script>
+
+</body>
 </html>
