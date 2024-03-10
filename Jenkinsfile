@@ -5,13 +5,13 @@ pipeline {
         stage('Build') {
             steps {
                 // Commands to build your project
-                sh 'echo "Building project..."'
+                bat 'echo Building project...'
             }
         }
         stage('Test') {
             steps {
                 // Commands to run tests
-                sh 'echo "Running tests..."'
+                bat 'echo Running tests...'
             }
         }
     }
