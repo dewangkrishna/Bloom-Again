@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="loginstyle.css">
+</head>
+<body>
+  <div class="container">
+    <div class="form-container" id="signup-form">
+      <h2>Sign Up</h2>
+      <form action="connect.php" method="post">
+        <input type="text" placeholder="Username" required name="username">
+        <input type="email" placeholder="Email" required name="email">
+        <input type="password" placeholder="Password" required name="password">
+        <button type="submit">Sign Up</button>
+      </form>
+      <p>Already have an account? <a href="loginSign.html">Login</a></p>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript to toggle between login and signup forms
+    document.getElementById('show-login').addEventListener('click', function(event) {
+      event.preventDefault();
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('login-form').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
