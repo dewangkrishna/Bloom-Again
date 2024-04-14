@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting Page</title>
+<link rel="stylesheet" type="text/css" href="/css/consulting.css">
+<style>
+  /* Modal CSS */
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Additional CSS for appointment form */
+  #appointment-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  #appointment-form input[type="text"],
+  #appointment-form input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  #appointment-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #appointment-form button:hover {
+    background-color: #45a049;
+  }
+
+  
+
+  .progress-bar {
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .progress {
+    height: 100%;
+    background-color: #63c763;
+    width: 0;
+    transition: width 1s ease-in-out;
+  }
+</style>
+</head>
+<body>
+
+<!-- Doctor Cards Section -->
+<div class="container">
+  <h1>Consulting Page</h1>
+  <div class="doctor-cards" id="doctor-cards-container">
+    <!-- Doctor cards will be dynamically generated here -->
+  </div>
+</div>
+
+<!-- Appointment Form Modal -->
+<div id="appointment-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Book Appointment</h2>
+    <p>Doctor: <span id="doctor-name"></span></p>
+    <form id="appointment-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br>
+      <label for="dob">Date:</label>
+      <input type="date" id="dob" name="dob" required><br>
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Function to open the modal and set doctor's name
+  function openModal(doctorName) {
+    var modal = document.getElementById('appointment-modal');
+    modal.style.display = 'block';
+
+    // Set the doctor's name in the modal
+    var doctorNameField = document.getElementById('doctor-name');
+    doctorNameField.textContent = doctorName;
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    var modal = document.getElementById('appointment-modal');
+    modal.style.display = 'none';
+  }
+
+  // Fetch doctors data from backend
+  fetch('/doctors')
+    .then(response => response.json())
+    .then(doctors => {
+      const doctorCardsContainer = document.getElementById('doctor-cards-container');
+      doctors.forEach(doctor => {
+        const doctorCard = `
+          <div class="doctor-card" data-doctor="${doctor.name}">
+            <img src="${doctor.image}" alt="${doctor.name}">
+            <h3>${doctor.name}</h3>
+            <div class="rating">
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+            </div>
+            <button class="book-btn" onclick="openModal('${doctor.name}')">Book Appointment</button>
+          </div>
+        `;
+        doctorCardsContainer.insertAdjacentHTML('beforeend', doctorCard);
+      });
+    })
+    .catch(error => console.error('Error fetching doctors:', error));
+
+  // Appointment booking functionality
+  document.getElementById('appointment-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get form data
+    const Pname = document.getElementById('name').value;
+    const dob = document.getElementById('dob').value;
+    const Dname = document.getElementById('doctor-name').textContent; // Get doctor name from modal
+
+    // Send appointment data to backend
+    fetch('/book-appointment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ Pname, Dname, Date: dob }),
+    })
+    .then(response => {
+      if (response.ok) {
+        // Display confirmation message
+        const confirmationMessage = document.createElement('div');
+        confirmationMessage.textContent = "Booking Confirmed. Check your email for further details.";
+        confirmationMessage.style.backgroundColor = "#4CAF50"; // Green color
+        confirmationMessage.style.color = "#fff";
+        confirmationMessage.style.padding = "10px";
+        confirmationMessage.style.marginTop = "10px";
+        confirmationMessage.style.borderRadius = "5px";
+
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.appendChild(confirmationMessage);
+
+        // Hide the modal after 3 seconds
+        setTimeout(function() {
+          closeModal();
+          modalContent.removeChild(confirmationMessage); // Remove the confirmation message
+        }, 3000);
+      } else {
+        console.error('Failed to book appointment');
+      }
+    })
+    .catch(error => console.error('Error booking appointment:', error));
+  });
+</script>
+</body>
+</html>

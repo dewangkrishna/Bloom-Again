@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Sharing</title>
+  <link rel="stylesheet" type="text/css" href="/css/write.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Quotes</h1>
+  <div id="quotes-container">
+    <!-- Quotes will be dynamically generated here -->
+  </div>
+  <button onclick="openModal()">Write Yours</button>
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Write Your Quote</h2>
+    <div class="form-group">
+      <label for="quote">Quote:</label>
+      <textarea id="quote" name="quote" rows="4" cols="50"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author">
+    </div>
+    <button type="button" onclick="saveQuote()">Save</button>
+  </div>
+</div>
+
+<script>
+  // Function to fetch and display quotes
+  function fetchAndDisplayQuotes() {
+    fetch('/quotes')
+      .then(response => response.json())
+      .then(quotes => {
+        const quotesContainer = document.getElementById('quotes-container');
+        quotesContainer.innerHTML = ''; // Clear existing quotes
+        quotes.forEach(quote => {
+          const quoteElement = `
+            <div class="quote">
+              <p>"${quote.Quote}"</p>
+              <span>- ${quote.name}</span>
+            </div>
+          `;
+          quotesContainer.insertAdjacentHTML('beforeend', quoteElement);
+        });
+      })
+      .catch(error => console.error('Error fetching quotes:', error));
+  }
+
+  // Call fetchAndDisplayQuotes when the page loads
+  window.onload = fetchAndDisplayQuotes;
+
+  // Function to open the modal
+  function openModal() {
+    document.getElementById("myModal").style.display = "block";
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+  }
+
+  // Function to save a new quote
+  function saveQuote() {
+    const quote = document.getElementById("quote").value;
+    const author = document.getElementById("author").value;
+
+    fetch('/save-quote', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ quote, author }),
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Quote saved successfully");
+        closeModal(); // Close the modal after saving
+        fetchAndDisplayQuotes(); // Fetch and display updated quotes
+      } else {
+        alert("Failed to save quote");
+      }
+    })
+    .catch(error => console.error('Error saving quote:', error));
+  }
+</script>
+
+</body>
+</html>

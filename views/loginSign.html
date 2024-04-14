@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="css/loginstyle.css">
+</head>
+<body>
+  <div class="container">
+    <div class="form-container" id="login-form">
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="text" placeholder="Username" id="username" required>
+        <input type="password" placeholder="Password" id="password" required >
+        <button type="submit">Login</button>
+      </form>
+      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+    
+            try {
+                console.log("username: " + username + " password: " + password);
+                $.ajax({
+                    url: '/loginuser', // Update the URL to match your server route
+                    type: 'POST',
+                    data: {
+                        username: username,
+                        password: password,
+                    },
+                    success: function(response) {
+                        alert(response); // Show message returned from server
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText); // Log any errors to the console
+                        alert('An error occurred while logging in. Please try again later.');
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error:', error.message);
+                alert('An error occurred while logging in. Please try again later.');
+            }
+        });
+    </script>
+
+</body>
+</html>
