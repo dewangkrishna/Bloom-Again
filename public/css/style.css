@@ -21,9 +21,9 @@ body, html {
   }
   
   /* Images used */
-  .img1 { background-image: url("assets/dsggd-800x450-1.jpg"); }
-  .img2 { background-image: url("assets/what-makes-people-happy.jpeg"); }
-  .img3 { background-image: url("assets/woman-enjoy-summer-beach.webp"); }
+  .img1 { background-image: url("../image/dsggd-800x450-1.jpg"); }
+  .img2 { background-image: url("../image/what-makes-people-happy.jpeg"); }
+  .img3 { background-image: url("../image/woman-enjoy-summer-beach.webp"); }
  
   
  

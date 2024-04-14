@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quote Sharing</title>
-  <link rel="stylesheet" type="text/css" href="/css/write.css">
+  <link rel="stylesheet" type="text/css" href="css/write.css">
 </head>
 <body>
 
@@ -43,7 +43,7 @@
         quotes.forEach(quote => {
           const quoteElement = `
             <div class="quote">
-              <p>"${quote.Quote}"</p>
+              <p>"${quote.Quotes}"</p>
               <span>- ${quote.name}</span>
             </div>
           `;
@@ -71,7 +71,7 @@
     const quote = document.getElementById("quote").value;
     const author = document.getElementById("author").value;
 
-    fetch('/save-quote', {
+    fetch('/quotes/save', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

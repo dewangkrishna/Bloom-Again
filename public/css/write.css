@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url("assets/what-makes-people-happy.jpeg"); /* Replace 'background.jpg' with the path to your image */
+    background-image: url("../image/what-makes-people-happy.jpeg"); /* Replace 'background.jpg' with the path to your image */
     background-size: cover;
     background-position: center;
     margin: 0;

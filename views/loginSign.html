@@ -30,7 +30,7 @@
             try {
                 console.log("username: " + username + " password: " + password);
                 $.ajax({
-                    url: '/loginuser', // Update the URL to match your server route
+                    url: '/loginroute/loginuser', // Update the URL to match your server route
                     type: 'POST',
                     data: {
                         username: username,
@@ -38,6 +38,7 @@
                     },
                     success: function(response) {
                         alert(response); // Show message returned from server
+                        window.location.href = '/index';
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText); // Log any errors to the console

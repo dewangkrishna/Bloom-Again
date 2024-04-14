@@ -134,7 +134,7 @@
   }
 
   // Fetch doctors data from backend
-  fetch('/doctors')
+  fetch('/consulting/doctors')
     .then(response => response.json())
     .then(doctors => {
       const doctorCardsContainer = document.getElementById('doctor-cards-container');
@@ -168,7 +168,7 @@
     const Dname = document.getElementById('doctor-name').textContent; // Get doctor name from modal
 
     // Send appointment data to backend
-    fetch('/book-appointment', {
+    fetch('/consulting/book-appointment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
