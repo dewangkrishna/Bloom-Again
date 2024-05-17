@@ -24,7 +24,7 @@ module.exports = function(db) {
     router.post('/save', async (req, res) => {
         const { quote, author } = req.body;
         try {
-            await queryAsync("INSERT INTO quotes (Quote, name) VALUES (?, ?)", [quote, author]);
+            await queryAsync("INSERT INTO quotes (Quotes, name) VALUES (?, ?)", [quote, author]);
             res.status(200).send('Quote saved successfully');
         } catch (error) {
             console.error("Error:", error);
